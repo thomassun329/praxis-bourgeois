@@ -1,0 +1,1056 @@
+<title>Praxis Bourgeois</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Mulish:wght@300;400;500;600;700&display=swap">
+<style>
+  :root {
+    /* — chosen palette: linen, forest-ink, sage, clay, greige — */
+    --linen:      #F6F3ED;
+    --linen-warm: #EFEAE0;
+    --paper:      #FCFAF6;
+    --ink:        #232A24;
+    --ink-soft:   #414A40;
+    --greige:     #8B8578;
+    --greige-2:   #B4AFA4;
+    --sage:       #7C8B72;
+    --sage-deep:  #5E6D55;
+    --sage-mist:  #E4E7DC;
+    --clay:       #C08560;
+    --clay-soft:  #E8D3C1;
+    --hairline:   rgba(35, 42, 36, 0.12);
+    --hairline-2: rgba(35, 42, 36, 0.07);
+
+    --bg:        var(--linen);
+    --surface:   var(--paper);
+    --surface-2: var(--linen-warm);
+    --text:      var(--ink);
+    --text-soft: var(--ink-soft);
+    --muted:     var(--greige);
+    --accent:    var(--sage-deep);
+    --accent-2:  var(--clay);
+    --mist:      var(--sage-mist);
+    --line:      var(--hairline);
+    --line-faint:var(--hairline-2);
+
+    --serif: "Fraunces", Georgia, "Times New Roman", serif;
+    --sans:  "Mulish", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
+    --measure: 64ch;
+    --gutter: clamp(20px, 5vw, 72px);
+    --maxw: 1180px;
+
+    --r-sm: 10px;
+    --r-md: 18px;
+    --r-lg: 32px;
+    --r-blob: 62% 38% 45% 55% / 55% 48% 52% 45%;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg:        #191C18;
+      --surface:   #20241E;
+      --surface-2: #262B24;
+      --text:      #ECEBE2;
+      --text-soft: #C6C7BB;
+      --muted:     #9A9A8C;
+      --accent:    #A9BA9C;
+      --accent-2:  #D69B77;
+      --mist:      #2C332A;
+      --line:      rgba(236, 235, 226, 0.14);
+      --line-faint:rgba(236, 235, 226, 0.08);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg:        #191C18;
+    --surface:   #20241E;
+    --surface-2: #262B24;
+    --text:      #ECEBE2;
+    --text-soft: #C6C7BB;
+    --muted:     #9A9A8C;
+    --accent:    #A9BA9C;
+    --accent-2:  #D69B77;
+    --mist:      #2C332A;
+    --line:      rgba(236, 235, 226, 0.14);
+    --line-faint:rgba(236, 235, 226, 0.08);
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: var(--sans);
+    font-weight: 400;
+    font-size: 17px;
+    line-height: 1.72;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+    overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    line-height: 1.08;
+    letter-spacing: -0.015em;
+    text-wrap: balance;
+    color: var(--text);
+    margin: 0;
+  }
+
+  p { margin: 0; }
+  a { color: inherit; }
+
+  .eyebrow {
+    font-family: var(--sans);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--accent);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7em;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 26px;
+    height: 1px;
+    background: var(--accent);
+    opacity: 0.7;
+  }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+  }
+
+  section { padding-block: clamp(72px, 11vw, 148px); }
+
+  /* ——— NAV ——— */
+  .nav {
+    position: sticky;
+    top: env(safe-area-inset-top, 0px);
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 86%, transparent);
+    backdrop-filter: saturate(1.4) blur(14px);
+    border-bottom: 1px solid var(--line-faint);
+  }
+  .nav-inner {
+    max-width: var(--maxw);
+    margin-inline: auto;
+    padding: 16px var(--gutter);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .brand {
+    font-family: var(--serif);
+    font-size: 1.28rem;
+    letter-spacing: -0.01em;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    color: var(--text);
+    white-space: nowrap;
+  }
+  .brand .mark {
+    width: 30px; height: 30px;
+    border-radius: var(--r-blob);
+    background: linear-gradient(145deg, var(--sage), var(--clay));
+    flex: none;
+  }
+  .brand small {
+    display: block;
+    font-family: var(--sans);
+    font-size: 0.6rem;
+    font-weight: 600;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 2.4vw, 34px);
+  }
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.86rem;
+    font-weight: 500;
+    color: var(--text-soft);
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a.desk { display: none; }
+  @media (min-width: 860px) { .nav-links a.desk { display: inline; } }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6em;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.01em;
+    padding: 0.72em 1.5em;
+    border-radius: 999px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: transform 0.18s ease, background 0.2s, color 0.2s, border-color 0.2s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--linen);
+  }
+  :root[data-theme="dark"] .btn-primary,
+  :root:not([data-theme="light"]) .btn-primary { }
+  .btn-primary:hover { transform: translateY(-2px); background: var(--sage-deep); }
+  :root[data-theme="dark"] .btn-primary { color: #171A15; }
+  .btn-ghost {
+    background: transparent;
+    color: var(--text);
+    border-color: var(--line);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+
+  /* ——— HERO ——— */
+  .hero { position: relative; padding-top: clamp(48px, 7vw, 96px); }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(40px, 6vw, 72px);
+    align-items: center;
+  }
+  @media (min-width: 900px) {
+    .hero-grid { grid-template-columns: 1.05fr 0.82fr; }
+  }
+  .hero h1 {
+    font-size: clamp(2.9rem, 7.2vw, 5.1rem);
+    font-optical-sizing: auto;
+    letter-spacing: -0.03em;
+    margin-top: 26px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+  .hero-lead {
+    font-size: clamp(1.06rem, 1.6vw, 1.22rem);
+    color: var(--text-soft);
+    max-width: 46ch;
+    margin-top: 26px;
+    line-height: 1.7;
+  }
+  .hero-cta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+    margin-top: 38px;
+  }
+  .hero-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 28px 40px;
+    margin-top: 52px;
+    padding-top: 34px;
+    border-top: 1px solid var(--line);
+  }
+  .hero-meta div { min-width: 90px; }
+  .hero-meta .n {
+    font-family: var(--serif);
+    font-size: 1.9rem;
+    color: var(--accent);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+  }
+  .hero-meta .l {
+    font-size: 0.78rem;
+    color: var(--muted);
+    letter-spacing: 0.03em;
+    margin-top: 8px;
+  }
+
+  /* portrait / organic art */
+  .hero-art { position: relative; justify-self: center; width: 100%; max-width: 440px; }
+  .hero-art .frame {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: var(--r-blob);
+    overflow: hidden;
+    background:
+      radial-gradient(120% 90% at 30% 15%, var(--clay-soft), transparent 60%),
+      linear-gradient(160deg, var(--mist), var(--surface-2));
+    box-shadow: 0 40px 80px -40px rgba(35,42,36,0.4);
+    animation: morph 18s ease-in-out infinite alternate;
+  }
+  @keyframes morph {
+    0%   { border-radius: 62% 38% 45% 55% / 55% 48% 52% 45%; }
+    100% { border-radius: 45% 55% 58% 42% / 48% 55% 45% 52%; }
+  }
+  .hero-art .portrait {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    mix-blend-mode: multiply;
+    opacity: 0.92;
+  }
+  :root[data-theme="dark"] .hero-art .portrait,
+  :root:not([data-theme="light"]) .hero-art .portrait { mix-blend-mode: luminosity; opacity: 0.8; }
+  .hero-art .placeholder-note {
+    position: absolute;
+    inset: auto 0 0 0;
+    padding: 14px 18px;
+    font-size: 0.7rem;
+    color: var(--text-soft);
+    background: color-mix(in srgb, var(--surface) 80%, transparent);
+    backdrop-filter: blur(4px);
+    text-align: center;
+    letter-spacing: 0.02em;
+  }
+  .leaf {
+    position: absolute;
+    border-radius: 0 100% 0 100%;
+    background: var(--sage);
+    opacity: 0.16;
+  }
+  .leaf.a { width: 120px; height: 120px; top: -34px; right: -18px; transform: rotate(20deg); }
+  .leaf.b { width: 78px; height: 78px; bottom: -26px; left: -26px; background: var(--clay); transform: rotate(-40deg); }
+
+  /* ——— generic section head ——— */
+  .head { max-width: 720px; }
+  .head h2 {
+    font-size: clamp(2rem, 4.2vw, 3.1rem);
+    margin-top: 20px;
+  }
+  .head p {
+    color: var(--text-soft);
+    font-size: 1.08rem;
+    margin-top: 20px;
+    max-width: var(--measure);
+  }
+
+  /* ——— ABOUT ——— */
+  .about-grid {
+    display: grid;
+    gap: clamp(36px, 5vw, 70px);
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  @media (min-width: 880px) { .about-grid { grid-template-columns: 0.85fr 1.15fr; } }
+  .about-card {
+    background: var(--surface);
+    border: 1px solid var(--line-faint);
+    border-radius: var(--r-lg);
+    padding: clamp(24px, 3vw, 38px);
+    position: relative;
+    box-shadow: 0 30px 60px -48px rgba(35,42,36,0.5);
+  }
+  .about-card .quote {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.35rem;
+    line-height: 1.5;
+    color: var(--text);
+  }
+  .about-card .quote::before { content: "„"; color: var(--accent-2); font-size: 1.6em; line-height: 0; vertical-align: -0.35em; margin-right: 0.05em; }
+  .sign { margin-top: 26px; display: flex; align-items: center; gap: 14px; }
+  .sign .n { font-family: var(--serif); font-size: 1.05rem; }
+  .sign .r { font-size: 0.8rem; color: var(--muted); }
+  .about-body p + p { margin-top: 20px; }
+  .about-body p { color: var(--text-soft); }
+  .about-body strong { color: var(--text); font-weight: 600; }
+
+  /* ——— APPROACH ——— */
+  .approach { background: var(--surface-2); }
+  .steps {
+    display: grid;
+    gap: 2px;
+    margin-top: 56px;
+    border-radius: var(--r-md);
+    overflow: hidden;
+    border: 1px solid var(--line-faint);
+    background: var(--line-faint);
+  }
+  @media (min-width: 760px) { .steps { grid-template-columns: repeat(3, 1fr); } }
+  .step {
+    background: var(--bg);
+    padding: clamp(26px, 3vw, 40px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .step .idx {
+    font-family: var(--serif);
+    font-size: 0.95rem;
+    color: var(--accent-2);
+    letter-spacing: 0.05em;
+  }
+  .step h3 { font-size: 1.4rem; }
+  .step p { color: var(--text-soft); font-size: 0.98rem; }
+
+  /* ——— SERVICES ——— */
+  .services-grid {
+    display: grid;
+    gap: 22px;
+    margin-top: 56px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) { .services-grid { grid-template-columns: 1fr 1fr; } }
+  .svc {
+    background: var(--surface);
+    border: 1px solid var(--line-faint);
+    border-radius: var(--r-md);
+    padding: clamp(26px, 3vw, 38px);
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    transition: transform 0.2s ease, border-color 0.2s;
+  }
+  .svc:hover { transform: translateY(-4px); border-color: var(--accent); }
+  .svc .ico {
+    width: 46px; height: 46px;
+    border-radius: 12px;
+    background: var(--mist);
+    color: var(--accent);
+    display: grid; place-items: center;
+    margin-bottom: 4px;
+  }
+  .svc .ico svg { width: 24px; height: 24px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+  .svc h3 { font-size: 1.42rem; }
+  .svc p { color: var(--text-soft); font-size: 0.98rem; flex: 1; }
+  .svc .meta {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding-top: 16px; margin-top: 4px;
+    border-top: 1px solid var(--line-faint);
+    font-size: 0.85rem; color: var(--muted);
+  }
+  .svc .meta b { font-family: var(--serif); font-weight: 500; color: var(--text); font-size: 1.05rem; }
+
+  /* ——— CREDENTIALS ——— */
+  .creds { background: var(--surface-2); }
+  .cred-layout { display: grid; gap: clamp(36px, 5vw, 64px); grid-template-columns: 1fr; }
+  @media (min-width: 880px) { .cred-layout { grid-template-columns: 0.9fr 1.1fr; } }
+  .qual-list { display: flex; flex-direction: column; gap: 0; margin-top: 40px; }
+  .qual {
+    display: grid;
+    grid-template-columns: 66px 1fr;
+    gap: 22px;
+    padding: 24px 0;
+    border-top: 1px solid var(--line);
+  }
+  .qual:last-child { border-bottom: 1px solid var(--line); }
+  .qual .yr { font-family: var(--serif); color: var(--accent); font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+  .qual h4 { margin: 0; font-size: 1.08rem; font-weight: 600; font-family: var(--sans); }
+  .qual p { color: var(--muted); font-size: 0.9rem; margin-top: 4px; }
+  .memberships {
+    background: var(--bg);
+    border: 1px solid var(--line-faint);
+    border-radius: var(--r-md);
+    padding: clamp(24px, 3vw, 34px);
+    margin-top: 40px;
+  }
+  .memberships .eyebrow { margin-bottom: 20px; }
+  .memberships ul { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 12px; }
+  .memberships li { display: flex; gap: 12px; align-items: flex-start; font-size: 0.94rem; color: var(--text-soft); }
+  .memberships li::before { content: "✦"; color: var(--accent-2); font-size: 0.8em; margin-top: 0.3em; }
+
+  /* ——— TESTIMONIALS ——— */
+  .voices-grid {
+    display: grid;
+    gap: 22px;
+    margin-top: 56px;
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 820px) { .voices-grid { grid-template-columns: repeat(3, 1fr); } }
+  .voice {
+    background: var(--surface);
+    border: 1px solid var(--line-faint);
+    border-radius: var(--r-md);
+    padding: clamp(24px, 2.6vw, 32px);
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+  .voice p {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 1.12rem;
+    line-height: 1.55;
+    color: var(--text);
+    flex: 1;
+  }
+  .voice .who { font-size: 0.82rem; color: var(--muted); letter-spacing: 0.02em; }
+  .voice .stars { color: var(--accent-2); font-size: 0.85rem; letter-spacing: 0.15em; }
+  .disclaimer { margin-top: 26px; font-size: 0.78rem; color: var(--muted); font-style: italic; }
+
+  /* ——— JOURNAL ——— */
+  .journal-grid {
+    display: grid;
+    gap: 2px;
+    margin-top: 56px;
+    border: 1px solid var(--line-faint);
+    border-radius: var(--r-md);
+    overflow: hidden;
+    background: var(--line-faint);
+  }
+  @media (min-width: 780px) { .journal-grid { grid-template-columns: repeat(3, 1fr); } }
+  .post {
+    background: var(--bg);
+    padding: clamp(26px, 3vw, 34px);
+    display: flex; flex-direction: column; gap: 14px;
+    text-decoration: none; color: inherit;
+    transition: background 0.2s;
+  }
+  .post:hover { background: var(--surface); }
+  .post .tag { font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; }
+  .post h3 { font-size: 1.28rem; }
+  .post p { color: var(--text-soft); font-size: 0.94rem; flex: 1; }
+  .post .more { font-size: 0.84rem; color: var(--accent-2); font-weight: 600; }
+
+  /* ——— CONTACT ——— */
+  .contact { background: var(--surface-2); }
+  .contact-grid { display: grid; gap: clamp(36px, 5vw, 64px); grid-template-columns: 1fr; align-items: start; }
+  @media (min-width: 900px) { .contact-grid { grid-template-columns: 0.95fr 1.05fr; } }
+  .contact-info { display: flex; flex-direction: column; gap: 26px; margin-top: 34px; }
+  .ci { display: flex; gap: 16px; align-items: flex-start; }
+  .ci .ic { width: 40px; height: 40px; border-radius: 11px; background: var(--mist); color: var(--accent); display: grid; place-items: center; flex: none; }
+  .ci .ic svg { width: 20px; height: 20px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+  .ci .lab { font-size: 0.74rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--muted); }
+  .ci .val { font-size: 1.02rem; color: var(--text); margin-top: 3px; }
+  .ci a { text-decoration: none; }
+  .ci a:hover { color: var(--accent); }
+
+  form {
+    background: var(--bg);
+    border: 1px solid var(--line-faint);
+    border-radius: var(--r-lg);
+    padding: clamp(26px, 3.4vw, 44px);
+    box-shadow: 0 40px 70px -50px rgba(35,42,36,0.5);
+  }
+  .field { margin-bottom: 22px; }
+  .field:last-of-type { margin-bottom: 28px; }
+  label { display: block; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-soft); margin-bottom: 9px; }
+  input, textarea, select {
+    width: 100%;
+    font-family: var(--sans);
+    font-size: 1rem;
+    color: var(--text);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: var(--r-sm);
+    padding: 13px 15px;
+    transition: border-color 0.2s, box-shadow 0.2s;
+  }
+  input::placeholder, textarea::placeholder { color: var(--greige-2); }
+  input:focus, textarea:focus, select:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--mist);
+  }
+  textarea { resize: vertical; min-height: 118px; }
+  .row2 { display: grid; gap: 22px; grid-template-columns: 1fr; }
+  @media (min-width: 540px) { .row2 { grid-template-columns: 1fr 1fr; } }
+  form button { width: 100%; justify-content: center; }
+  .form-note { font-size: 0.78rem; color: var(--muted); margin-top: 16px; text-align: center; }
+  .form-status { font-size: 0.9rem; color: var(--accent); margin-top: 14px; text-align: center; min-height: 1.2em; font-weight: 600; }
+
+  /* ——— FOOTER ——— */
+  footer {
+    background: var(--ink);
+    color: #D9DBCF;
+    padding-block: clamp(56px, 7vw, 84px) 40px;
+  }
+  :root[data-theme="dark"] footer,
+  :root:not([data-theme="light"]) footer { background: #12140F; }
+  .foot-grid { display: grid; gap: 40px; grid-template-columns: 1fr; }
+  @media (min-width: 720px) { .foot-grid { grid-template-columns: 1.4fr 1fr 1fr; } }
+  footer .brand { color: #F3F2E8; }
+  footer .brand small { color: #9DA090; }
+  .foot-blurb { color: #A9AC9C; font-size: 0.95rem; margin-top: 18px; max-width: 34ch; }
+  .foot-col h5 { font-family: var(--sans); font-size: 0.74rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8B8E7E; margin: 0 0 16px; font-weight: 700; }
+  .foot-col a { display: block; text-decoration: none; color: #C9CBBD; font-size: 0.92rem; padding: 5px 0; }
+  .foot-col a:hover { color: #F3F2E8; }
+  .foot-bottom {
+    margin-top: 52px; padding-top: 26px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex; flex-wrap: wrap; gap: 12px 24px; justify-content: space-between;
+    font-size: 0.8rem; color: #8B8E7E;
+  }
+
+  /* theme toggle */
+  .toggle {
+    width: 38px; height: 38px; flex: none;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: transparent;
+    color: var(--text-soft);
+    display: grid; place-items: center;
+    cursor: pointer;
+    transition: border-color 0.2s, color 0.2s;
+  }
+  .toggle:hover { border-color: var(--accent); color: var(--accent); }
+  .toggle svg { width: 17px; height: 17px; stroke: currentColor; fill: none; stroke-width: 1.6; }
+  .toggle .moon { display: none; }
+  :root[data-theme="dark"] .toggle .sun,
+  :root:not([data-theme="light"]) .toggle .sun { display: none; }
+  :root[data-theme="dark"] .toggle .moon,
+  :root:not([data-theme="light"]) .toggle .moon { display: block; }
+  :root[data-theme="light"] .toggle .sun { display: block; }
+  :root[data-theme="light"] .toggle .moon { display: none; }
+
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+</style>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <span class="mark" aria-hidden="true"></span>
+      <span>Dorthe Bourgeois<small>Psychologische Beratung</small></span>
+    </a>
+    <div class="nav-links">
+      <a class="desk" href="#ueber">Über mich</a>
+      <a class="desk" href="#ansatz">Ansatz</a>
+      <a class="desk" href="#leistungen">Leistungen</a>
+      <a class="desk" href="#journal">Journal</a>
+      <button class="toggle" id="themeToggle" aria-label="Farbschema wechseln">
+        <svg class="sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>
+        <svg class="moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></svg>
+      </button>
+      <a class="btn btn-primary" href="#kontakt">Termin anfragen</a>
+    </div>
+  </div>
+</nav>
+
+<a id="top"></a>
+
+<!-- ——— HERO ——— -->
+<header class="hero">
+  <div class="wrap">
+    <div class="hero-grid">
+      <div class="hero-text">
+        <span class="eyebrow">Praxis für psychologische Beratung · Berlin</span>
+        <h1>Ein Raum, in dem Sie <em>ankommen</em> dürfen.</h1>
+        <p class="hero-lead">
+          Manchmal braucht es einen ruhigen Ort und ein aufmerksames Gegenüber, um wieder
+          Klarheit zu finden. In meiner Praxis begleite ich Sie einfühlsam durch Phasen der
+          Veränderung, Belastung und Neuorientierung – in Ihrem Tempo.
+        </p>
+        <div class="hero-cta">
+          <a class="btn btn-primary" href="#kontakt">Erstgespräch vereinbaren</a>
+          <a class="btn btn-ghost" href="#ansatz">Meine Arbeitsweise</a>
+        </div>
+        <div class="hero-meta">
+          <div><div class="n">15+</div><div class="l">Jahre Erfahrung</div></div>
+          <div><div class="n">1.200+</div><div class="l">Begleitete Menschen</div></div>
+          <div><div class="n">DE&nbsp;·&nbsp;DK</div><div class="l">Sprachen</div></div>
+        </div>
+      </div>
+      <div class="hero-art">
+        <span class="leaf a" aria-hidden="true"></span>
+        <span class="leaf b" aria-hidden="true"></span>
+        <div class="frame">
+          <!-- Portrait platzhalter: hier kommt ein warmes, ruhiges Porträtfoto hin -->
+          <div class="placeholder-note">Platz für Ihr Porträtfoto</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ——— ABOUT ——— -->
+<section id="ueber">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-card">
+        <p class="quote">Heilung beginnt in dem Moment, in dem wir uns erlauben, gesehen zu werden.“</p>
+        <div class="sign">
+          <div>
+            <div class="n">Dorthe Bourgeois</div>
+            <div class="r">M.Sc. Psychologin · Systemische Beraterin</div>
+          </div>
+        </div>
+      </div>
+      <div class="about-body">
+        <span class="eyebrow">Über mich</span>
+        <h2 style="font-size:clamp(1.9rem,3.8vw,2.7rem);margin-top:18px;margin-bottom:26px;">
+          Zwischen Fachlichkeit und echter Begegnung.
+        </h2>
+        <p>
+          Seit über fünfzehn Jahren begleite ich Menschen dabei, schwierige Lebensphasen nicht nur
+          zu überstehen, sondern an ihnen zu wachsen. Mein Weg führte mich von der klinischen
+          Psychologie über die systemische Beratung bis hin zu körperorientierten Verfahren –
+          immer mit derselben Überzeugung: <strong>Veränderung entsteht in Sicherheit, nicht unter Druck.</strong>
+        </p>
+        <p>
+          Ich verstehe Beratung nicht als das Reparieren von etwas Kaputtem, sondern als das
+          gemeinsame Freilegen dessen, was in Ihnen bereits angelegt ist. In unseren Gesprächen
+          gibt es keine Bewertung, kein Richtig oder Falsch – nur den Raum, ehrlich zu sein.
+        </p>
+        <p>
+          Aufgewachsen zweisprachig zwischen Flensburg und Kopenhagen, arbeite ich auf Deutsch und
+          Dänisch und weiß, wie sehr Sprache, Herkunft und Zugehörigkeit unser inneres Erleben
+          prägen.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ——— APPROACH ——— -->
+<section id="ansatz" class="approach">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Mein Ansatz</span>
+      <h2>Drei Grundhaltungen, die meine Arbeit tragen.</h2>
+      <p>
+        Kein starres Programm, sondern eine Beziehung, die sich Ihrem Anliegen anpasst.
+        So sieht der gemeinsame Weg in der Regel aus.
+      </p>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <span class="idx">01 — Ankommen</span>
+        <h3>Zuhören ohne Eile</h3>
+        <p>
+          Im ersten Schritt geht es nur darum, dass Sie sich verstanden fühlen. Wir schauen
+          gemeinsam, was Sie belastet und was Sie sich wünschen – ganz ohne vorgefertigte Lösung.
+        </p>
+      </div>
+      <div class="step">
+        <span class="idx">02 — Verstehen</span>
+        <h3>Muster erkennen</h3>
+        <p>
+          Behutsam machen wir sichtbar, welche inneren und äußeren Muster Sie festhalten. Verstehen
+          schafft Distanz – und Distanz eröffnet Handlungsspielraum.
+        </p>
+      </div>
+      <div class="step">
+        <span class="idx">03 — Verändern</span>
+        <h3>Neue Wege gehen</h3>
+        <p>
+          Schritt für Schritt entwickeln Sie tragfähige Wege, die zu Ihrem Leben passen. Ich
+          begleite Sie, bis Sie sie selbst sicher gehen können.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ——— SERVICES ——— -->
+<section id="leistungen">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Leistungen</span>
+      <h2>Begleitung, die zu Ihrer Lebenssituation passt.</h2>
+      <p>Ob Einzelperson, Paar oder in einer beruflichen Umbruchphase – hier finden Sie den passenden Rahmen.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 21c-5-3.5-8-6.8-8-11a4.8 4.8 0 0 1 8-3.5A4.8 4.8 0 0 1 20 10c0 4.2-3 7.5-8 11Z"/></svg></span>
+        <h3>Einzelberatung</h3>
+        <p>
+          Ein geschützter Raum für alles, was Sie bewegt – von Ängsten und Erschöpfung über
+          Selbstzweifel bis zu Sinnfragen und persönlicher Weiterentwicklung.
+        </p>
+        <div class="meta"><span>50 Min. · vor Ort oder online</span><b>ab 95 €</b></div>
+      </div>
+      <div class="svc">
+        <span class="ico"><svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="3.2"/><circle cx="16" cy="9" r="3.2"/><path d="M3 20c0-3 2.2-5 5-5s5 2 5 5M13 20c.4-2.6 2.4-4.2 5-4.2S22.6 17.4 23 20"/></svg></span>
+        <h3>Paarberatung</h3>
+        <p>
+          Wenn das Miteinander stockt, helfe ich Ihnen, einander wieder zuzuhören – Konflikte
+          zu entschärfen und eine gemeinsame Sprache zurückzugewinnen.
+        </p>
+        <div class="meta"><span>80 Min. · vor Ort</span><b>ab 150 €</b></div>
+      </div>
+      <div class="svc">
+        <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3v6M12 21v-4M5 7l3 3M19 7l-3 3M4 16h4M16 16h4"/><circle cx="12" cy="13" r="3"/></svg></span>
+        <h3>Krisen &amp; Übergänge</h3>
+        <p>
+          Trennung, Verlust, Burnout oder ein tiefgreifender Wandel: In akuten Phasen biete ich
+          engmaschige, stabilisierende Begleitung mit kurzfristigen Terminen.
+        </p>
+        <div class="meta"><span>50 Min. · zeitnah verfügbar</span><b>ab 95 €</b></div>
+      </div>
+      <div class="svc">
+        <span class="ico"><svg viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M8 9h8M8 13h5"/></svg></span>
+        <h3>Coaching &amp; Standortbestimmung</h3>
+        <p>
+          Für berufliche Neuorientierung, Führungsthemen und die Frage, was wirklich zu Ihnen
+          passt – klärend, ressourcenorientiert und lösungsfokussiert.
+        </p>
+        <div class="meta"><span>60 Min. · vor Ort oder online</span><b>ab 120 €</b></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ——— CREDENTIALS ——— -->
+<section id="qualifikationen" class="creds">
+  <div class="wrap">
+    <div class="cred-layout">
+      <div>
+        <span class="eyebrow">Qualifikation</span>
+        <h2 style="font-size:clamp(1.9rem,3.8vw,2.7rem);margin-top:18px;">
+          Fundiert ausgebildet, kontinuierlich weitergebildet.
+        </h2>
+        <div class="memberships">
+          <span class="eyebrow">Mitgliedschaften</span>
+          <ul>
+            <li>Berufsverband Deutscher Psychologinnen und Psychologen (BDP)</li>
+            <li>Systemische Gesellschaft (SG)</li>
+            <li>Deutsche Gesellschaft für Beratung (DGfB)</li>
+          </ul>
+        </div>
+      </div>
+      <div class="qual-list">
+        <div class="qual">
+          <span class="yr">2008</span>
+          <div><h4>M.Sc. Psychologie</h4><p>Humboldt-Universität zu Berlin · Schwerpunkt Klinische Psychologie</p></div>
+        </div>
+        <div class="qual">
+          <span class="yr">2012</span>
+          <div><h4>Systemische Beraterin (SG)</h4><p>Dreijährige curriculare Weiterbildung, systemische Gesellschaft</p></div>
+        </div>
+        <div class="qual">
+          <span class="yr">2016</span>
+          <div><h4>Körperorientierte Traumaberatung</h4><p>Fortbildung in Somatic Experiencing® nach Peter Levine</p></div>
+        </div>
+        <div class="qual">
+          <span class="yr">2020</span>
+          <div><h4>Weiterbildung Paar- &amp; Sexualberatung</h4><p>Institut für systemische Beratung, Berlin</p></div>
+        </div>
+        <div class="qual">
+          <span class="yr">seit 2009</span>
+          <div><h4>Eigene Praxis</h4><p>Fortlaufende Supervision &amp; Intervision zur Qualitätssicherung</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ——— TESTIMONIALS ——— -->
+<section id="stimmen">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Stimmen</span>
+      <h2>Was Menschen aus der Begleitung mitnehmen.</h2>
+    </div>
+    <div class="voices-grid">
+      <div class="voice">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>Zum ersten Mal hatte ich das Gefühl, wirklich gehört zu werden – ohne Eile, ohne Urteil. Ich habe gelernt, mir selbst wieder zu vertrauen.</p>
+        <span class="who">— M. K., 41, nach beruflicher Neuorientierung</span>
+      </div>
+      <div class="voice">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>Frau Bourgeois hat uns als Paar geholfen, einander wieder zuzuhören. Wir sprechen heute anders miteinander – wärmer und ehrlicher.</p>
+        <span class="who">— A. &amp; T., gemeinsame Beratung</span>
+      </div>
+      <div class="voice">
+        <span class="stars" aria-hidden="true">★★★★★</span>
+        <p>In einer sehr dunklen Phase war diese Praxis mein sicherer Hafen. Ruhig, klar, menschlich. Ich bin unendlich dankbar.</p>
+        <span class="who">— S. R., nach einer Verlustkrise</span>
+      </div>
+    </div>
+    <p class="disclaimer">
+      Alle Rückmeldungen wurden mit ausdrücklicher Einwilligung anonymisiert und ohne Nennung
+      personenbezogener Daten veröffentlicht.
+    </p>
+  </div>
+</section>
+
+<!-- ——— JOURNAL ——— -->
+<section id="journal" class="approach">
+  <div class="wrap">
+    <div class="head">
+      <span class="eyebrow">Journal</span>
+      <h2>Gedanken &amp; Impulse für den Alltag.</h2>
+      <p>Kleine Lektüren zwischen den Terminen – über Ruhe, Beziehung und den Mut, hinzuschauen.</p>
+    </div>
+    <div class="journal-grid">
+      <a class="post" href="#journal">
+        <span class="tag">Selbstfürsorge</span>
+        <h3>Warum Pausen keine Schwäche sind</h3>
+        <p>Über die Kunst, im richtigen Moment innezuhalten – und was unser Nervensystem uns damit sagen möchte.</p>
+        <span class="more">Weiterlesen →</span>
+      </a>
+      <a class="post" href="#journal">
+        <span class="tag">Beziehung</span>
+        <h3>Zuhören, das verbindet</h3>
+        <p>Vier kleine Haltungen, die Gesprächen zwischen Partnern wieder Nähe schenken.</p>
+        <span class="more">Weiterlesen →</span>
+      </a>
+      <a class="post" href="#journal">
+        <span class="tag">Resilienz</span>
+        <h3>Wenn alles zu viel wird</h3>
+        <p>Erste Schritte aus der Überforderung – und woran Sie erkennen, dass es Zeit für Unterstützung ist.</p>
+        <span class="more">Weiterlesen →</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ——— CONTACT ——— -->
+<section id="kontakt" class="contact">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div>
+        <span class="eyebrow">Kontakt</span>
+        <h2 style="font-size:clamp(1.9rem,3.8vw,2.7rem);margin-top:18px;">
+          Der erste Schritt darf leicht sein.
+        </h2>
+        <p style="color:var(--text-soft);margin-top:22px;max-width:44ch;">
+          Schreiben Sie mir ein paar Zeilen zu Ihrem Anliegen. Das kostenlose Kennenlerngespräch
+          (15 Minuten, telefonisch) ist unverbindlich – Sie spüren dabei, ob die Chemie stimmt.
+        </p>
+        <div class="contact-info">
+          <div class="ci">
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M4 6h16v12H4z"/><path d="m4 7 8 6 8-6"/></svg></span>
+            <div><div class="lab">E-Mail</div><div class="val"><a href="mailto:kontakt@praxis-bourgeois.de">kontakt@praxis-bourgeois.de</a></div></div>
+          </div>
+          <div class="ci">
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M5 4h4l2 5-3 2a12 12 0 0 0 5 5l2-3 5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2Z"/></svg></span>
+            <div><div class="lab">Telefon</div><div class="val"><a href="tel:+493012345678">+49 30 123 456 78</a></div></div>
+          </div>
+          <div class="ci">
+            <span class="ic"><svg viewBox="0 0 24 24"><path d="M12 21s7-6.2 7-11a7 7 0 1 0-14 0c0 4.8 7 11 7 11Z"/><circle cx="12" cy="10" r="2.4"/></svg></span>
+            <div><div class="lab">Praxis</div><div class="val">Kollwitzstraße 12 · 10405 Berlin</div></div>
+          </div>
+          <div class="ci">
+            <span class="ic"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8.5"/><path d="M12 7v5l3 2"/></svg></span>
+            <div><div class="lab">Sprechzeiten</div><div class="val">Mo – Do · 9 – 18 Uhr · Termine nach Vereinbarung</div></div>
+          </div>
+        </div>
+      </div>
+      <form id="contactForm" novalidate>
+        <div class="row2">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" placeholder="Ihr Name" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="email">E-Mail</label>
+            <input id="email" name="email" type="email" placeholder="name@beispiel.de" autocomplete="email" required>
+          </div>
+        </div>
+        <div class="field">
+          <label for="topic">Anliegen</label>
+          <select id="topic" name="topic">
+            <option>Einzelberatung</option>
+            <option>Paarberatung</option>
+            <option>Krise &amp; Übergang</option>
+            <option>Coaching &amp; Standortbestimmung</option>
+            <option>Ich bin mir noch nicht sicher</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="message">Ihre Nachricht</label>
+          <textarea id="message" name="message" placeholder="Erzählen Sie mir in ein paar Sätzen, worum es geht. Alles, was Sie schreiben, bleibt vertraulich."></textarea>
+        </div>
+        <button class="btn btn-primary" type="submit">Nachricht senden</button>
+        <p class="form-status" id="formStatus" role="status" aria-live="polite"></p>
+        <p class="form-note">Ihre Angaben werden vertraulich behandelt und nicht an Dritte weitergegeben.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ——— FOOTER ——— -->
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a class="brand" href="#top" style="color:#F3F2E8;">
+          <span class="mark" aria-hidden="true"></span>
+          <span>Dorthe Bourgeois<small style="color:#9DA090;">Psychologische Beratung</small></span>
+        </a>
+        <p class="foot-blurb">
+          Einfühlsame psychologische Beratung in Berlin – für Menschen, die sich selbst wieder
+          näherkommen möchten. Auf Deutsch und Dänisch.
+        </p>
+      </div>
+      <div class="foot-col">
+        <h5>Navigation</h5>
+        <a href="#ueber">Über mich</a>
+        <a href="#ansatz">Ansatz</a>
+        <a href="#leistungen">Leistungen</a>
+        <a href="#journal">Journal</a>
+        <a href="#kontakt">Kontakt</a>
+      </div>
+      <div class="foot-col">
+        <h5>Rechtliches</h5>
+        <a href="#">Impressum</a>
+        <a href="#">Datenschutz</a>
+        <a href="#">Vertraulichkeit</a>
+        <a href="#kontakt">Termin anfragen</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 Praxis Dorthe Bourgeois · Alle Rechte vorbehalten.</span>
+      <span>Mit Sorgfalt gestaltet in Berlin.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Theme toggle — respects system default until the visitor chooses.
+  (function () {
+    var root = document.documentElement;
+    var btn = document.getElementById('themeToggle');
+    try {
+      var saved = localStorage.getItem('praxis-theme');
+      if (saved === 'light' || saved === 'dark') root.setAttribute('data-theme', saved);
+    } catch (e) {}
+    btn.addEventListener('click', function () {
+      var current = root.getAttribute('data-theme');
+      if (!current) {
+        current = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+      }
+      var next = current === 'dark' ? 'light' : 'dark';
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('praxis-theme', next); } catch (e) {}
+    });
+  })();
+
+  // Smooth scroll for in-page anchors
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (id.length < 2) return;
+      var el = document.querySelector(id);
+      if (!el) return;
+      e.preventDefault();
+      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Contact form — demo behaviour (no backend). Confirms without sending.
+  var form = document.getElementById('contactForm');
+  var status = document.getElementById('formStatus');
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var name = document.getElementById('name');
+    var email = document.getElementById('email');
+    if (!name.value.trim() || !email.value.trim()) {
+      status.style.color = 'var(--accent-2)';
+      status.textContent = 'Bitte geben Sie Ihren Namen und Ihre E-Mail-Adresse an.';
+      return;
+    }
+    status.style.color = 'var(--accent)';
+    status.textContent = 'Vielen Dank, ' + name.value.trim().split(' ')[0] + '. Ihre Nachricht ist angekommen – ich melde mich zeitnah.';
+    form.reset();
+  });
+</script>
