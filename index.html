@@ -209,10 +209,16 @@
     background: var(--accent);
     color: var(--linen);
   }
-  :root[data-theme="dark"] .btn-primary,
-  :root:not([data-theme="light"]) .btn-primary { }
   .btn-primary:hover { transform: translateY(-2px); background: var(--sage-deep); }
-  :root[data-theme="dark"] .btn-primary { color: #171A15; }
+
+  /* Dark mode: the accent fill is light, so the label must be dark (near the
+     page background green) and the hover must stay light enough to keep it readable. */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) .btn-primary { color: #1B2018; }
+    :root:not([data-theme="light"]) .btn-primary:hover { background: #C0CEB4; }
+  }
+  :root[data-theme="dark"] .btn-primary { color: #1B2018; }
+  :root[data-theme="dark"] .btn-primary:hover { background: #C0CEB4; }
   .btn-ghost {
     background: transparent;
     color: var(--text);
